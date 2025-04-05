@@ -1,0 +1,144 @@
+[gd_scene load_steps=6 format=3 uid="uid://cahtw76d106nm"]
+
+[ext_resource type="PackedScene" uid="uid://cfj0fwcathp4i" path="res://Assets/Scenes/water_body.tscn" id="1_js7d2"]
+[ext_resource type="Texture2D" uid="uid://cfhegmb0fsux" path="res://icon.svg" id="2_m8got"]
+[ext_resource type="PackedScene" uid="uid://bd3pq8v5k5o6s" path="res://Assets/Scenes/player.tscn" id="2_p1whu"]
+[ext_resource type="PackedScene" uid="uid://c040ial6lvrtx" path="res://Assets/Scenes/ui.tscn" id="4_w28hk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kbcu8"]
+size = Vector2(128, 128)
+
+[node name="World" type="Node2D"]
+
+[node name="WaterBody" parent="." instance=ExtResource("1_js7d2")]
+position = Vector2(-1000, 0)
+spring_number = 100
+
+[node name="Player" parent="." instance=ExtResource("2_p1whu")]
+z_index = 1
+position = Vector2(439, -200)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UI" parent="CanvasLayer" instance=ExtResource("4_w28hk")]
+
+[node name="Obstacles" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Obstacles"]
+position = Vector2(344, 174)
+
+[node name="Sprite2D" type="Sprite2D" parent="Obstacles/StaticBody2D"]
+texture = ExtResource("2_m8got")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/StaticBody2D"]
+shape = SubResource("RectangleShape2D_kbcu8")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Obstacles"]
+position = Vector2(544, 160)
+
+[node name="Sprite2D" type="Sprite2D" parent="Obstacles/StaticBody2D2"]
+texture = ExtResource("2_m8got")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/StaticBody2D2"]
+shape = SubResource("RectangleShape2D_kbcu8")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Obstacles"]
+position = Vector2(714, 194)
+
+[node name="Sprite2D" type="Sprite2D" parent="Obstacles/StaticBody2D3"]
+texture = ExtResource("2_m8got")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/StaticBody2D3"]
+shape = SubResource("RectangleShape2D_kbcu8")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Obstacles"]
+position = Vector2(204, 387)
+
+[node name="Sprite2D" type="Sprite2D" parent="Obstacles/StaticBody2D4"]
+texture = ExtResource("2_m8got")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/StaticBody2D4"]
+shape = SubResource("RectangleShape2D_kbcu8")
+
+[node name="StaticBody2D5" type="StaticBody2D" parent="Obstacles"]
+position = Vector2(456, 509)
+
+[node name="Sprite2D" type="Sprite2D" parent="Obstacles/StaticBody2D5"]
+texture = ExtResource("2_m8got")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/StaticBody2D5"]
+shape = SubResource("RectangleShape2D_kbcu8")
+
+[node name="StaticBody2D6" type="StaticBody2D" parent="Obstacles"]
+position = Vector2(675, 543)
+
+[node name="Sprite2D" type="Sprite2D" parent="Obstacles/StaticBody2D6"]
+texture = ExtResource("2_m8got")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/StaticBody2D6"]
+shape = SubResource("RectangleShape2D_kbcu8")
+
+[node name="StaticBody2D7" type="StaticBody2D" parent="Obstacles"]
+position = Vector2(563, 757)
+
+[node name="Sprite2D" type="Sprite2D" parent="Obstacles/StaticBody2D7"]
+texture = ExtResource("2_m8got")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/StaticBody2D7"]
+shape = SubResource("RectangleShape2D_kbcu8")
+
+[node name="StaticBody2D8" type="StaticBody2D" parent="Obstacles"]
+position = Vector2(967, 444)
+
+[node name="Sprite2D" type="Sprite2D" parent="Obstacles/StaticBody2D8"]
+texture = ExtResource("2_m8got")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/StaticBody2D8"]
+shape = SubResource("RectangleShape2D_kbcu8")
+
+[node name="StaticBody2D9" type="StaticBody2D" parent="Obstacles"]
+position = Vector2(899, 115)
+
+[node name="Sprite2D" type="Sprite2D" parent="Obstacles/StaticBody2D9"]
+texture = ExtResource("2_m8got")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/StaticBody2D9"]
+shape = SubResource("RectangleShape2D_kbcu8")
+
+[node name="StaticBody2D10" type="StaticBody2D" parent="Obstacles"]
+position = Vector2(1049, 86)
+
+[node name="Sprite2D" type="Sprite2D" parent="Obstacles/StaticBody2D10"]
+texture = ExtResource("2_m8got")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/StaticBody2D10"]
+shape = SubResource("RectangleShape2D_kbcu8")
+
+[node name="StaticBody2D13" type="StaticBody2D" parent="Obstacles"]
+position = Vector2(441, -82)
+
+[node name="Sprite2D" type="Sprite2D" parent="Obstacles/StaticBody2D13"]
+texture = ExtResource("2_m8got")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/StaticBody2D13"]
+shape = SubResource("RectangleShape2D_kbcu8")
+
+[node name="StaticBody2D11" type="StaticBody2D" parent="Obstacles"]
+position = Vector2(1211, 3)
+
+[node name="Sprite2D" type="Sprite2D" parent="Obstacles/StaticBody2D11"]
+texture = ExtResource("2_m8got")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/StaticBody2D11"]
+shape = SubResource("RectangleShape2D_kbcu8")
+
+[node name="StaticBody2D12" type="StaticBody2D" parent="Obstacles"]
+position = Vector2(1352, 3)
+
+[node name="Sprite2D" type="Sprite2D" parent="Obstacles/StaticBody2D12"]
+texture = ExtResource("2_m8got")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/StaticBody2D12"]
+shape = SubResource("RectangleShape2D_kbcu8")

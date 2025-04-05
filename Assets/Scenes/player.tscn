@@ -1,0 +1,203 @@
+[gd_scene load_steps=29 format=3 uid="uid://bd3pq8v5k5o6s"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/Player.gd" id="1_vdvhn"]
+[ext_resource type="Texture2D" uid="uid://b7j8l0sbtg7kn" path="res://Assets/Graphics/placeholder_player.png" id="2_roabi"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4m53k"]
+radius = 6.0
+height = 20.0
+
+[sub_resource type="Animation" id="Animation_tqh3w"]
+resource_name = "Idle"
+
+[sub_resource type="Animation" id="Animation_awffh"]
+resource_name = "Walking"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_frlyd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_cib5e"]
+resource_name = "Swiming_H"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_72pdf"]
+resource_name = "Swiming_V"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 11]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f17y2"]
+_data = {
+"Idle": SubResource("Animation_tqh3w"),
+"RESET": SubResource("Animation_frlyd"),
+"Swiming_H": SubResource("Animation_cib5e"),
+"Swiming_V": SubResource("Animation_72pdf"),
+"Walking": SubResource("Animation_awffh")
+}
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_ehr5j"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_55263"]
+animation = &"Swiming_H"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_e2kfb"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_55263")
+blend_point_0/pos = 0.0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xonph"]
+animation = &"Swiming_V"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_yg87c"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_xonph")
+blend_point_0/pos = 0.0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_n6odl"]
+animation = &"Walking"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_5vkbx"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_n6odl")
+blend_point_0/pos = 0.0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kirup"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0ejoh"]
+advance_mode = 2
+advance_condition = &"is_walking"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ulou3"]
+advance_mode = 2
+advance_condition = &"is_idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7oyum"]
+advance_mode = 2
+advance_condition = &"is_swimming"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_u0jva"]
+advance_mode = 2
+advance_condition = &"is_idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1qcne"]
+advance_mode = 2
+advance_condition = &"is_swimming_V"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_e1ulw"]
+advance_mode = 2
+advance_condition = &"is_swimming"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sv5x7"]
+advance_mode = 2
+advance_condition = &"is_swimming"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_syqmw"]
+advance_mode = 2
+advance_condition = &"is_walking"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_btuo4"]
+advance_mode = 2
+advance_condition = &"is_walking"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_j4ay1"]
+advance_mode = 2
+advance_condition = &"is_swimming_V"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_jgnnw"]
+states/Idle/node = SubResource("AnimationNodeBlendSpace1D_ehr5j")
+states/Idle/position = Vector2(345, 100)
+states/Swimming_H/node = SubResource("AnimationNodeBlendSpace1D_e2kfb")
+states/Swimming_H/position = Vector2(521.416, 8.86215)
+states/Swimming_V/node = SubResource("AnimationNodeBlendSpace1D_yg87c")
+states/Swimming_V/position = Vector2(711.416, 2.86215)
+states/Walking/node = SubResource("AnimationNodeBlendSpace1D_5vkbx")
+states/Walking/position = Vector2(521.416, 100)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_kirup"), "Idle", "Walking", SubResource("AnimationNodeStateMachineTransition_0ejoh"), "Walking", "Idle", SubResource("AnimationNodeStateMachineTransition_ulou3"), "Idle", "Swimming_H", SubResource("AnimationNodeStateMachineTransition_7oyum"), "Swimming_H", "Idle", SubResource("AnimationNodeStateMachineTransition_u0jva"), "Swimming_H", "Swimming_V", SubResource("AnimationNodeStateMachineTransition_1qcne"), "Swimming_V", "Swimming_H", SubResource("AnimationNodeStateMachineTransition_e1ulw"), "Walking", "Swimming_H", SubResource("AnimationNodeStateMachineTransition_sv5x7"), "Swimming_H", "Walking", SubResource("AnimationNodeStateMachineTransition_syqmw"), "Swimming_V", "Walking", SubResource("AnimationNodeStateMachineTransition_btuo4"), "Walking", "Swimming_V", SubResource("AnimationNodeStateMachineTransition_j4ay1")]
+graph_offset = Vector2(-407.584, -146.516)
+
+[node name="Player" type="CharacterBody2D"]
+scale = Vector2(4, 4)
+script = ExtResource("1_vdvhn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 5
+shape = SubResource("CapsuleShape2D_4m53k")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_roabi")
+hframes = 12
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_f17y2")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_f17y2")
+}
+tree_root = SubResource("AnimationNodeStateMachine_jgnnw")
+anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/is_idle = false
+parameters/conditions/is_swimming = false
+parameters/conditions/is_swimming_V = false
+parameters/conditions/is_walking = false
+parameters/Idle/blend_position = 0
+parameters/Swimming_H/blend_position = 0
+parameters/Swimming_V/blend_position = 0
+parameters/Walking/blend_position = 0.0892495
+
+[node name="OxygenTimer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[connection signal="timeout" from="OxygenTimer" to="." method="_on_oxygen_timer_timeout"]
