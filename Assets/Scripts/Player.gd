@@ -11,14 +11,18 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var in_water = false
 
+var on_wall = false
+var climbing = false
+@export var climb_speed = 100.0
+
 @onready var oxygenTimer: Timer = $OxygenTimer
 
 func _process(delta):
 	
-	if Globals.oxygen <= 0:
+	if Globals.health <= 0:
 		queue_free()
 		
-	if global_position.y > 0:
+	if global_position.y > -20:
 		in_water = true
 	else:
 		in_water = false
@@ -27,7 +31,6 @@ func _process(delta):
 func _physics_process(delta):
 	if in_water:
 		velocity.y = 0
-
 		var direction = Input.get_axis("ui_left", "ui_right")
 		if direction:
 			velocity.x = direction * swim_speed
@@ -36,11 +39,13 @@ func _physics_process(delta):
 
 		if Input.is_action_pressed("ui_accept"):
 			velocity.y = -swim_speed
-		
+
 		if Input.is_action_pressed("ui_down"):
 			velocity.y = swim_speed
 	else:
-		if not is_on_floor():
+		on_wall = is_on_wall()
+
+		if not is_on_floor() and not climbing:
 			velocity.y += gravity * delta
 
 		var direction = Input.get_axis("ui_left", "ui_right")
@@ -52,6 +57,15 @@ func _physics_process(delta):
 		if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 			velocity.y = JUMP_VELOCITY
 
+		# Wall climbing
+		if on_wall and Input.is_action_pressed("ui_accept"):
+			climbing = true
+			velocity.y = -climb_speed
+		elif on_wall and climbing and not Input.is_action_pressed("ui_accept"):
+			velocity.y = 0
+		else:
+			climbing = false
+
 	if velocity.x < 0:
 		sprite.flip_h = true
 	elif velocity.x > 0:
@@ -59,6 +73,7 @@ func _physics_process(delta):
 
 	move_and_slide()
 	update_animation_parameters()
+
 
 
 func update_animation_parameters():
@@ -85,8 +100,15 @@ func update_animation_parameters():
 
 
 func _on_oxygen_timer_timeout():
-	if in_water == true:
+	if in_water == true and Globals.oxygen > 0:
 		Globals.oxygen -= 1
 		oxygenTimer.start()
 	elif in_water == false and Globals.oxygen < 100:
 		Globals.oxygen += 10
+	elif (Globals.oxygen <= 0 and in_water) or Globals.hunger <= 0:
+		Globals.health -= 1
+
+
+func _on_hunger_timer_timeout():
+	if Globals.hunger > 0:
+		Globals.hunger -= 1

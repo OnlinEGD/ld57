@@ -8,7 +8,7 @@ var springs: Array = []
 var passes: int = 8
 
 @export var distance_between_springs: int = 32
-@export var spring_number: int = 6
+@export var spring_number: int = 1000
 
 @onready var water_spring: PackedScene = preload("res://Assets/Scenes/water_spring.tscn")
 
@@ -19,8 +19,10 @@ var bottom = target_height + depth
 @onready var water_polygon: Polygon2D = $WaterPolygon
 
 @export var particle_count = 1000
+@export var fish_count = 100
 
 @onready var bubble_particle: PackedScene = preload("res://Assets/Scenes/bubble_particle.tscn")
+@onready var fish: PackedScene = preload("res://Assets/Scenes/fish.tscn")
 
 func _ready():
 	for i in range(spring_number):
@@ -35,8 +37,13 @@ func _ready():
 	for y in range(particle_count):
 		var b = bubble_particle.instantiate()
 		add_child(b)
-		b.global_position = Vector2(randi_range(-1000,10000), randi_range(100,10000))
+		b.global_position = Vector2(randi_range(-4000,4000), randi_range(100,10000))
 	
+	for i in range(fish_count):
+		var f = fish.instantiate()
+		var pos = Vector2(randi_range(-4000,4000), randi_range(100,1000))
+		f.global_position = pos
+		add_child(f)
 
 func _physics_process(delta):
 	for i in springs:

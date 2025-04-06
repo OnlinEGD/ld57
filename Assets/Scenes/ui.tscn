@@ -1,6 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://c040ial6lvrtx"]
+[gd_scene load_steps=8 format=3 uid="uid://c040ial6lvrtx"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/ui.gd" id="1_tsvdm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6fhlm"]
+bg_color = Color(0, 0.294118, 0.309804, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0.721569, 0.760784, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_io3et"]
 bg_color = Color(0, 0.768627, 0.815686, 1)
@@ -9,8 +21,58 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0, 0.721569, 0.760784, 1)
-shadow_color = Color(0, 0, 0, 0.254902)
-shadow_size = 10
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fw7ck"]
+bg_color = Color(0.360784, 0.109804, 0.117647, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.560784, 0.172549, 0.180392, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4pk2g"]
+bg_color = Color(0.792157, 0.247059, 0.254902, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.560784, 0.172549, 0.180392, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6e3fv"]
+bg_color = Color(0.133333, 0.380392, 0.14902, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.207843, 0.588235, 0.231373, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b724b"]
+bg_color = Color(0.258824, 0.733333, 0.290196, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.207843, 0.588235, 0.231373, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [node name="UI" type="Control"]
 layout_mode = 3
@@ -33,7 +95,7 @@ offset_top = -54.0
 offset_right = 66.0
 grow_vertical = 0
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="OxygenLabel" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 text = "OXYGEN"
 horizontal_alignment = 1
@@ -41,5 +103,30 @@ horizontal_alignment = 1
 [node name="OxygenBar" type="ProgressBar" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/background = SubResource("StyleBoxFlat_6fhlm")
 theme_override_styles/fill = SubResource("StyleBoxFlat_io3et")
+value = 100.0
+
+[node name="HealtLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "HEALTH"
+horizontal_alignment = 1
+
+[node name="HealthBar" type="ProgressBar" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/background = SubResource("StyleBoxFlat_fw7ck")
+theme_override_styles/fill = SubResource("StyleBoxFlat_4pk2g")
+value = 100.0
+
+[node name="HungerLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "HUNGER"
+horizontal_alignment = 1
+
+[node name="HungerBar" type="ProgressBar" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/background = SubResource("StyleBoxFlat_6e3fv")
+theme_override_styles/fill = SubResource("StyleBoxFlat_b724b")
 value = 100.0
