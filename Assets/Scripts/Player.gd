@@ -20,12 +20,16 @@ var climbing = false
 func _process(delta):
 	
 	if Globals.health <= 0:
-		queue_free()
+		#queue_free()
+		pass
 		
 	if global_position.y > -20:
 		in_water = true
 	else:
 		in_water = false
+		
+	if in_water:
+		Globals.depth = int(position.y / 100)
 		
 
 func _physics_process(delta):

@@ -14,9 +14,10 @@ func _ready():
 
 func _on_body_entered(body):
 	if body.name == "Player":
-		Globals.hunger = min(Globals.hunger + 5, 100) 
-		Globals.fish_count
-		queue_free() 
+		if Equipment.items < Equipment.max_items:
+			Equipment.add_item("fish")
+			Globals.fish_count
+			queue_free() 
 
 func _process(delta):
 	var motion = direction * speed * delta

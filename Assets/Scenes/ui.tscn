@@ -1,6 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://c040ial6lvrtx"]
+[gd_scene load_steps=10 format=3 uid="uid://c040ial6lvrtx"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/ui.gd" id="1_tsvdm"]
+[ext_resource type="Script" path="res://Assets/Scripts/Globals/Equipment.gd" id="2_yciyi"]
+[ext_resource type="PackedScene" uid="uid://civywa3cg1oim" path="res://Assets/Scenes/slot.tscn" id="3_jyl4l"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6fhlm"]
 bg_color = Color(0, 0.294118, 0.309804, 1)
@@ -82,6 +84,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
+mouse_filter = 2
 script = ExtResource("1_tsvdm")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -130,3 +133,64 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_styles/background = SubResource("StyleBoxFlat_6e3fv")
 theme_override_styles/fill = SubResource("StyleBoxFlat_b724b")
 value = 100.0
+
+[node name="DepthLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 20
+text = "0 METERS"
+
+[node name="Inventory" type="Control" parent="."]
+layout_mode = 1
+anchor_left = 0.5
+anchor_top = 0.9
+anchor_right = 0.5
+anchor_bottom = 0.99
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("2_yciyi")
+
+[node name="GridContainer" type="GridContainer" parent="Inventory"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 68
+columns = 5
+
+[node name="Slot" parent="Inventory/GridContainer" instance=ExtResource("3_jyl4l")]
+layout_mode = 2
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Slot2" parent="Inventory/GridContainer" instance=ExtResource("3_jyl4l")]
+layout_mode = 2
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Slot3" parent="Inventory/GridContainer" instance=ExtResource("3_jyl4l")]
+layout_mode = 2
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Slot4" parent="Inventory/GridContainer" instance=ExtResource("3_jyl4l")]
+layout_mode = 2
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Slot5" parent="Inventory/GridContainer" instance=ExtResource("3_jyl4l")]
+layout_mode = 2
+ignore_texture_size = true
+stretch_mode = 0
