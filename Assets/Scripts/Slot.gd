@@ -13,4 +13,5 @@ func _on_pressed():
 	if item == ItemDB.items["fish"]:
 		Globals.hunger = min(Globals.hunger + 5, 100) 
 		Equipment.items -= 1
+		Equipment.itemsArray[Equipment.slots.find(self)] = ""
 		set_item(null)

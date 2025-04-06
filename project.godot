@@ -18,8 +18,6 @@ config/icon="res://icon.svg"
 [autoload]
 
 Globals="*res://Assets/Scripts/Globals/globals.gd"
-ItemDB="*res://Assets/Scripts/Globals/item_database.gd"
-Equipment="*res://Assets/Scripts/Globals/Equipment.gd"
 
 [input]
 

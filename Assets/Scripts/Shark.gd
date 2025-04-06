@@ -1,30 +1,34 @@
 extends CharacterBody2D
 
-var speed = randf_range(50, 200)  # Zmiennoprzecinkowa prędkość
+var speed = randf_range(50, 200)
 var direction = Vector2()
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var changeDirectionTimer: Timer = $ChangeDirectionTimer
 
+var chasing = false
+
 func _ready():
-	modulate = Color(randf_range(0.2, 1), randf_range(0.2, 1), randf_range(0.2, 1), 1)
 	changeDirectionTimer.wait_time = randf_range(1,5)
 	direction = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
 
-
 func _on_body_entered(body):
 	if body.name == "Player":
-		Globals.hunger = min(Globals.hunger + 5, 100)
-		queue_free() 
-	if body.name == "TileMap":
-		direction.y = -direction.y
+		Globals.health -= 10
 
 func _process(delta):
 	var motion = direction * speed * delta
 	motion = move_and_collide(motion) 
 	
-	if position.y <= 20 or position.y > 1000:
+	if chasing:
+		direction = ($"../../Player".global_position - global_position).normalized()
+	
+	if position.y <= 20:
+		chasing = false
 		direction.y = -direction.y
+	else:
+		chasing = true
+		
 		
 	if direction.x < 0:
 		sprite.flip_h = true
@@ -33,3 +37,19 @@ func _process(delta):
 
 func _on_change_direction_timer_timeout():
 	direction = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
+
+
+func _on_player_detector_body_entered(body):
+	if body.name == "Player":
+		changeDirectionTimer.stop()
+		chasing = true
+		$Label.visible = true
+	if body.name == "Tilemap":
+		direction.y = -direction.y
+
+func _on_player_detector_body_exited(body):
+	if body.name == "Player":
+		chasing = false
+		changeDirectionTimer.start()
+		direction = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
+		$Label.visible = false

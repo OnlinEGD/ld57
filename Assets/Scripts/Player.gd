@@ -17,11 +17,13 @@ var climbing = false
 
 @onready var oxygenTimer: Timer = $OxygenTimer
 
-func _process(delta):
+func _process(_delta):
+	
+	if Globals.score == 3 and $"../CanvasLayer/UI".visible == true:
+		print("koniec gry")
 	
 	if Globals.health <= 0:
-		#queue_free()
-		pass
+		queue_free()
 		
 	if global_position.y > -20:
 		in_water = true
@@ -107,12 +109,13 @@ func _on_oxygen_timer_timeout():
 	if in_water == true and Globals.oxygen > 0:
 		Globals.oxygen -= 1
 		oxygenTimer.start()
-	elif in_water == false and Globals.oxygen < 100:
+	elif in_water == false and Globals.oxygen < $"../CanvasLayer/UI"/VBoxContainer/OxygenBar.max_value:
 		Globals.oxygen += 10
-	elif (Globals.oxygen <= 0 and in_water) or Globals.hunger <= 0:
+	elif Globals.oxygen <= 0 or Globals.hunger <= 0:
 		Globals.health -= 1
+		oxygenTimer.start()
 
 
 func _on_hunger_timer_timeout():
 	if Globals.hunger > 0:
-		Globals.hunger -= 1
+		Globals.hunger -= 5

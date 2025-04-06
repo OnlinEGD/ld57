@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://c040ial6lvrtx"]
+[gd_scene load_steps=11 format=3 uid="uid://c040ial6lvrtx"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/ui.gd" id="1_tsvdm"]
-[ext_resource type="Script" path="res://Assets/Scripts/Globals/Equipment.gd" id="2_yciyi"]
-[ext_resource type="PackedScene" uid="uid://civywa3cg1oim" path="res://Assets/Scenes/slot.tscn" id="3_jyl4l"]
+[ext_resource type="Texture2D" uid="uid://b02ic7bcs8jue" path="res://Assets/Graphics/battery.png" id="2_d4edw"]
+[ext_resource type="Texture2D" uid="uid://bqptyqceux1x8" path="res://Assets/Graphics/reapair_kit.png" id="3_qjae2"]
+[ext_resource type="Texture2D" uid="uid://boooxr3vq7rw1" path="res://Assets/Graphics/spark.png" id="4_ah53a"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6fhlm"]
 bg_color = Color(0, 0.294118, 0.309804, 1)
@@ -143,54 +144,57 @@ offset_left = -20.0
 offset_right = 20.0
 offset_bottom = 23.0
 grow_horizontal = 2
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 30
 text = "0 METERS"
 
-[node name="Inventory" type="Control" parent="."]
+[node name="ScrapLabel" type="Label" parent="."]
+texture_filter = 1
 layout_mode = 1
+anchors_preset = -1
 anchor_left = 0.5
 anchor_top = 0.9
 anchor_right = 0.5
-anchor_bottom = 0.99
-offset_left = -20.0
-offset_top = -40.0
-offset_right = 20.0
+anchor_bottom = 0.9
+offset_left = -30.5
+offset_top = -23.0
+offset_right = 30.5
 grow_horizontal = 2
 grow_vertical = 0
-script = ExtResource("2_yciyi")
+theme_override_font_sizes/font_size = 40
+text = "Scrap: 0"
+horizontal_alignment = 1
 
-[node name="GridContainer" type="GridContainer" parent="Inventory"]
+[node name="Objectives" type="HBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/h_separation = 68
-columns = 5
+anchors_preset = -1
+anchor_left = 0.8
+anchor_top = 0.9
+anchor_right = 0.9
+anchor_bottom = 0.9
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(1.96, 1.96)
 
-[node name="Slot" parent="Inventory/GridContainer" instance=ExtResource("3_jyl4l")]
+[node name="Battery" type="TextureRect" parent="Objectives"]
+modulate = Color(1, 1, 1, 0.380392)
+texture_filter = 1
 layout_mode = 2
-ignore_texture_size = true
-stretch_mode = 0
+texture = ExtResource("2_d4edw")
+expand_mode = 2
 
-[node name="Slot2" parent="Inventory/GridContainer" instance=ExtResource("3_jyl4l")]
+[node name="RepairKit" type="TextureRect" parent="Objectives"]
+modulate = Color(1, 1, 1, 0.380392)
+texture_filter = 1
 layout_mode = 2
-ignore_texture_size = true
-stretch_mode = 0
+texture = ExtResource("3_qjae2")
+expand_mode = 2
 
-[node name="Slot3" parent="Inventory/GridContainer" instance=ExtResource("3_jyl4l")]
+[node name="Spark" type="TextureRect" parent="Objectives"]
+modulate = Color(0.513726, 0.513726, 0.513726, 1)
+self_modulate = Color(1, 1, 1, 0.380392)
+texture_filter = 1
 layout_mode = 2
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="Slot4" parent="Inventory/GridContainer" instance=ExtResource("3_jyl4l")]
-layout_mode = 2
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="Slot5" parent="Inventory/GridContainer" instance=ExtResource("3_jyl4l")]
-layout_mode = 2
-ignore_texture_size = true
-stretch_mode = 0
+texture = ExtResource("4_ah53a")
+expand_mode = 2
