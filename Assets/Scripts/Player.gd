@@ -19,7 +19,7 @@ var climbing = false
 
 func _process(_delta):
 	
-	if Globals.score == 3 and $"../CanvasLayer/UI".visible == true:
+	if Globals.score == 3 and global_position.y <= -20:
 		print("koniec gry")
 	
 	if Globals.health <= 0:
@@ -60,7 +60,7 @@ func _physics_process(delta):
 		else:
 			velocity.x = move_toward(velocity.x, 0, speed)
 
-		if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+		if Input.is_action_pressed("ui_accept") and is_on_floor():
 			velocity.y = JUMP_VELOCITY
 
 		# Wall climbing
@@ -118,4 +118,4 @@ func _on_oxygen_timer_timeout():
 
 func _on_hunger_timer_timeout():
 	if Globals.hunger > 0:
-		Globals.hunger -= 5
+		Globals.hunger -= 1

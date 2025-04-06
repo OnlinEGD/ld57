@@ -202,7 +202,6 @@ wait_time = 0.1
 autostart = true
 
 [node name="HungerTimer" type="Timer" parent="."]
-wait_time = 5.0
 autostart = true
 
 [connection signal="timeout" from="OxygenTimer" to="." method="_on_oxygen_timer_timeout"]

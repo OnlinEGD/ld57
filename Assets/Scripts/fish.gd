@@ -14,7 +14,7 @@ func _ready():
 
 func _on_body_entered(body):
 	if body.name == "Player":
-		Globals.hunger = min(Globals.hunger + 5, 100)
+		Globals.hunger = min(Globals.hunger + 20, 100)
 		queue_free() 
 	if body.name == "TileMap":
 		direction.y = -direction.y

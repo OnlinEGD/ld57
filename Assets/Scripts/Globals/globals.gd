@@ -7,3 +7,4 @@ var fish_count = 50
 var depth = 0
 var scrap = 0
 var score = 0
+var show_annoucement = false

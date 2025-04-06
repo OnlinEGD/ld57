@@ -17,4 +17,6 @@ func _on_button_pressed():
 	if Globals.scrap >= 3:
 		Globals.scrap -= 3
 		Globals.oxygen += 100
+		Globals.show_annoucement = true
+		$"../CanvasLayer/UI"/InfoLabel.text = "Oxygen tank capacity increased. You can breathe underwater longer"
 		emit_signal("oxygenSet")
