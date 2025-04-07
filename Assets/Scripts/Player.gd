@@ -13,17 +13,20 @@ var in_water = false
 
 var on_wall = false
 var climbing = false
-@export var climb_speed = 100.0
+@export var climb_speed = 200.0
 
 @onready var oxygenTimer: Timer = $OxygenTimer
 
 func _process(_delta):
-	
 	if Globals.score == 4 and global_position.y <= -20:
-		get_tree().change_scene_to_file("res://Assets/Scenes/epilog.tscn")
+		get_tree().change_scene_to_file("res://Assets/Scenes/epilogue.tscn")
+		
+	if $SoundTimer.is_stopped() and global_position.y <= -20 and global_position.y >= -30 :
+		$SoundTimer.start()
+		$AudioStreamPlayer2D.play()
 	
 	if Globals.health <= 0:
-		queue_free()
+		get_tree().change_scene_to_file("res://Assets/Scenes/deathScreen.tscn")
 		
 	if global_position.y > -20:
 		in_water = true
@@ -123,3 +126,22 @@ func _on_oxygen_timer_timeout():
 func _on_hunger_timer_timeout():
 	if Globals.hunger > 0:
 		Globals.hunger -= 1
+
+
+func _on_audio_stream_player_2d_finished():
+	$AudioStreamPlayer2D.play()
+	
+func take_damage():
+	if !$Player_damage.is_playing():
+		$Player_damage.play()
+		$AnimationPlayer.play("Hurt")
+
+
+func _on_audio_stream_player_2d_2_finished():
+	$AudioStreamPlayer2D2.play()
+
+
+func _on_timer_timeout():
+	$Timer.start()
+	if Globals.health < 100:
+		Globals.health += 1

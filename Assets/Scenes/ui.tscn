@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://c040ial6lvrtx"]
+[gd_scene load_steps=12 format=3 uid="uid://c040ial6lvrtx"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/ui.gd" id="1_tsvdm"]
 [ext_resource type="Texture2D" uid="uid://b02ic7bcs8jue" path="res://Assets/Graphics/battery.png" id="2_d4edw"]
 [ext_resource type="Texture2D" uid="uid://bqptyqceux1x8" path="res://Assets/Graphics/reapair_kit.png" id="3_qjae2"]
 [ext_resource type="Texture2D" uid="uid://boooxr3vq7rw1" path="res://Assets/Graphics/spark.png" id="4_ah53a"]
+[ext_resource type="AudioStream" uid="uid://bjvax7gxqi1ri" path="res://Assets/SFX/notification.wav" id="5_r2tvr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6fhlm"]
 bg_color = Color(0, 0.294118, 0.309804, 1)
@@ -167,9 +168,9 @@ horizontal_alignment = 1
 [node name="Objectives" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.8
-anchor_top = 0.9
-anchor_right = 0.9
+anchor_left = 0.716
+anchor_top = 0.87
+anchor_right = 0.829
 anchor_bottom = 0.9
 offset_left = -40.0
 offset_top = -40.0
@@ -192,8 +193,7 @@ texture = ExtResource("3_qjae2")
 expand_mode = 2
 
 [node name="Spark" type="TextureRect" parent="Objectives"]
-modulate = Color(0.513726, 0.513726, 0.513726, 1)
-self_modulate = Color(1, 1, 1, 0.380392)
+modulate = Color(1, 1, 1, 0.380392)
 texture_filter = 1
 layout_mode = 2
 texture = ExtResource("4_ah53a")
@@ -218,5 +218,8 @@ autowrap_mode = 2
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_r2tvr")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

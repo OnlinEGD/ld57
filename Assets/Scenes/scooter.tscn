@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://chc08bt2sbbu"]
+[gd_scene load_steps=7 format=3 uid="uid://chc08bt2sbbu"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/scooter.gd" id="1_qms67"]
 [ext_resource type="Texture2D" uid="uid://bulr0vxek7a5y" path="res://Assets/Graphics/destroyed_scooter.png" id="1_vgrhy"]
 [ext_resource type="StyleBox" uid="uid://bqt0hvmw4s67i" path="res://Assets/scooter.tres" id="3_jokq4"]
+[ext_resource type="AudioStream" uid="uid://dyqrueddckbtv" path="res://Assets/SFX/powerUp.wav" id="4_i0rfm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6fewe"]
 size = Vector2(116, 42)
@@ -84,6 +85,9 @@ theme_override_font_sizes/font_size = 10
 theme_override_styles/normal = ExtResource("3_jokq4")
 theme_override_styles/hover = SubResource("StyleBoxFlat_j72ku")
 text = "CRAFT"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_i0rfm")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

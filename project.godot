@@ -10,11 +10,12 @@ config_version=5
 
 [application]
 
-config/name="ld57"
+config/name="Depth Explorer"
 run/main_scene="res://Assets/Scenes/prologue.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
-boot_splash/bg_color=Color(0.141176, 0.141176, 0.141176, 1)
-config/icon="res://icon.svg"
+boot_splash/show_image=false
+config/icon="res://Assets/Graphics/logo.png"
+config/windows_native_icon="res://Assets/Graphics/logo.ico"
 
 [autoload]
 

@@ -1,13 +1,13 @@
 shader_type canvas_item;
 
-uniform float depth_factor : hint_range(0.0, 1.0);
+uniform float top_y = 0.0;
+uniform float bottom_y = 1000.0;
+uniform float darkness_strength = 0.7;
 
 void fragment() {
-    vec4 color = texture(TEXTURE, FRAGCOORD.xy / SCREEN_PIXEL_SIZE);
-    
-    float alpha = 1.0 - depth_factor;
-    
-    color.a *= alpha;
-    
-    COLOR = color;
+    float y = SCREEN_UV.y;
+    float factor = clamp((UV.y - top_y) / (bottom_y - top_y), 0.0, 1.0);
+    float darkness = mix(0.0, darkness_strength, factor);
+    COLOR = vec4(vec3(1.0 - darkness), 1.0);
 }
+

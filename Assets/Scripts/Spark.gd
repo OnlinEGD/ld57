@@ -6,4 +6,5 @@ func _on_body_entered(body):
 		$"../CanvasLayer/UI"/Objectives/Spark.modulate = "ffffffff"
 		Globals.show_annoucement = true
 		$"../CanvasLayer/UI"/InfoLabel.text = "You found an item necessary to repair the scooter"
+		
 		queue_free()

@@ -15,6 +15,7 @@ func _ready():
 
 func _on_body_entered(body):
 	if body.name == "Player":
+		body.take_damage()
 		Globals.health -= 10
 
 func _process(delta):

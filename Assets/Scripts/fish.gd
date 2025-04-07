@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var speed = randf_range(50, 200)  # Zmiennoprzecinkowa prędkość
+var speed = randf_range(50, 200)
 var direction = Vector2()
 
 @onready var sprite: Sprite2D = $Sprite2D
@@ -8,7 +8,8 @@ var direction = Vector2()
 
 func _ready():
 	modulate = Color(randf_range(0.2, 1), randf_range(0.2, 1), randf_range(0.2, 1), 1)
-	changeDirectionTimer.wait_time = randf_range(1,5)
+	changeDirectionTimer.wait_time = randi_range(1,5)
+	changeDirectionTimer.start()
 	direction = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
 
 
@@ -16,8 +17,6 @@ func _on_body_entered(body):
 	if body.name == "Player":
 		Globals.hunger = min(Globals.hunger + 20, 100)
 		queue_free() 
-	if body.name == "TileMap":
-		direction.y = -direction.y
 
 func _process(delta):
 	var motion = direction * speed * delta
@@ -33,3 +32,4 @@ func _process(delta):
 
 func _on_change_direction_timer_timeout():
 	direction = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
+	changeDirectionTimer.start()

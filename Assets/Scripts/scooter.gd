@@ -15,6 +15,7 @@ func _on_body_exited(body):
 
 func _on_button_pressed():
 	if Globals.scrap >= 3:
+		$AudioStreamPlayer2D.play()
 		Globals.scrap -= 3
 		Globals.oxygen += 100
 		Globals.show_annoucement = true

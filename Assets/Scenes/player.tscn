@@ -1,11 +1,45 @@
-[gd_scene load_steps=29 format=3 uid="uid://bd3pq8v5k5o6s"]
+[gd_scene load_steps=33 format=3 uid="uid://bd3pq8v5k5o6s"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Player.gd" id="1_vdvhn"]
 [ext_resource type="Texture2D" uid="uid://b7j8l0sbtg7kn" path="res://Assets/Graphics/placeholder_player.png" id="2_roabi"]
+[ext_resource type="AudioStream" uid="uid://ccs7tdf2j87of" path="res://Assets/SFX/chlup.mp3" id="3_c3n22"]
+[ext_resource type="AudioStream" uid="uid://buyly3ligvctt" path="res://Assets/SFX/player_damage.mp3" id="4_iv82h"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4m53k"]
 radius = 6.0
 height = 20.0
+
+[sub_resource type="Animation" id="Animation_2alcc"]
+resource_name = "Climb"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [12, 13]
+}
+
+[sub_resource type="Animation" id="Animation_nxnfm"]
+resource_name = "Hurt"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, true, false, true]
+}
 
 [sub_resource type="Animation" id="Animation_tqh3w"]
 resource_name = "Idle"
@@ -23,6 +57,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_cib5e"]
@@ -78,6 +124,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_f17y2"]
 _data = {
+"Climb": SubResource("Animation_2alcc"),
+"Hurt": SubResource("Animation_nxnfm"),
 "Idle": SubResource("Animation_tqh3w"),
 "RESET": SubResource("Animation_frlyd"),
 "Swiming_H": SubResource("Animation_cib5e"),
@@ -155,9 +203,9 @@ advance_condition = &"is_swimming_V"
 states/Idle/node = SubResource("AnimationNodeBlendSpace1D_ehr5j")
 states/Idle/position = Vector2(345, 100)
 states/Swimming_H/node = SubResource("AnimationNodeBlendSpace1D_e2kfb")
-states/Swimming_H/position = Vector2(521.416, 8.86215)
+states/Swimming_H/position = Vector2(411.416, -47.1378)
 states/Swimming_V/node = SubResource("AnimationNodeBlendSpace1D_yg87c")
-states/Swimming_V/position = Vector2(711.416, 2.86215)
+states/Swimming_V/position = Vector2(718.416, -47.1378)
 states/Walking/node = SubResource("AnimationNodeBlendSpace1D_5vkbx")
 states/Walking/position = Vector2(521.416, 100)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_kirup"), "Idle", "Walking", SubResource("AnimationNodeStateMachineTransition_0ejoh"), "Walking", "Idle", SubResource("AnimationNodeStateMachineTransition_ulou3"), "Idle", "Swimming_H", SubResource("AnimationNodeStateMachineTransition_7oyum"), "Swimming_H", "Idle", SubResource("AnimationNodeStateMachineTransition_u0jva"), "Swimming_H", "Swimming_V", SubResource("AnimationNodeStateMachineTransition_1qcne"), "Swimming_V", "Swimming_H", SubResource("AnimationNodeStateMachineTransition_e1ulw"), "Walking", "Swimming_H", SubResource("AnimationNodeStateMachineTransition_sv5x7"), "Swimming_H", "Walking", SubResource("AnimationNodeStateMachineTransition_syqmw"), "Swimming_V", "Walking", SubResource("AnimationNodeStateMachineTransition_btuo4"), "Walking", "Swimming_V", SubResource("AnimationNodeStateMachineTransition_j4ay1")]
@@ -175,7 +223,7 @@ shape = SubResource("CapsuleShape2D_4m53k")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = ExtResource("2_roabi")
-hframes = 12
+hframes = 16
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -202,7 +250,23 @@ wait_time = 0.1
 autostart = true
 
 [node name="HungerTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="SoundTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_c3n22")
+
+[node name="Player_damage" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_iv82h")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
 autostart = true
 
 [connection signal="timeout" from="OxygenTimer" to="." method="_on_oxygen_timer_timeout"]
 [connection signal="timeout" from="HungerTimer" to="." method="_on_hunger_timer_timeout"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

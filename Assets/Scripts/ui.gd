@@ -23,12 +23,15 @@ func _process(_delta):
 	scrapLabel.text = "Scrap: " + str(Globals.scrap)
 	
 	if infoLabel.text != "" and Globals.show_annoucement:
+		print($AudioStreamPlayer2D.playing)
+		if !$AudioStreamPlayer2D.playing:
+			$AudioStreamPlayer2D.play()
 		$Timer.start()
 		Globals.show_annoucement = false
 		
-	if Globals.oxygen == 49:
+	if Globals.oxygen == oxygenBar.max_value/2 - 1:
 		Globals.show_annoucement = true
-		infoLabel.text = "Oxygen level is below 50. You should swim to the surface"
+		infoLabel.text = "Oxygen level is below 50%. You should swim to the surface"
 		
 	if Globals.hunger == 49:
 		Globals.show_annoucement = true
