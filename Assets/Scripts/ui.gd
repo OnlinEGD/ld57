@@ -34,12 +34,9 @@ func _process(_delta):
 		Globals.show_annoucement = true
 		infoLabel.text = "You are hungy. You should get some fish"
 		
-	if Globals.score == 1 or Globals.score == 2:
-		Globals.show_annoucement = true
-		infoLabel.text = "You found an item necessary to repair the scooter"
-		
 	if Globals.score == 3:
 		Globals.show_annoucement = true
+		Globals.score += 1
 		infoLabel.text = "You found all the items needed to fix the scooter. Return to the surface"
 		
 func updateOxygenBar():

@@ -19,8 +19,8 @@ var climbing = false
 
 func _process(_delta):
 	
-	if Globals.score == 3 and global_position.y <= -20:
-		print("koniec gry")
+	if Globals.score == 4 and global_position.y <= -20:
+		get_tree().change_scene_to_file("res://Assets/Scenes/epilog.tscn")
 	
 	if Globals.health <= 0:
 		queue_free()
@@ -111,7 +111,11 @@ func _on_oxygen_timer_timeout():
 		oxygenTimer.start()
 	elif in_water == false and Globals.oxygen < $"../CanvasLayer/UI"/VBoxContainer/OxygenBar.max_value:
 		Globals.oxygen += 10
-	elif Globals.oxygen <= 0 or Globals.hunger <= 0:
+	elif Globals.oxygen <= 0:
+		Globals.health -= 1
+		oxygenTimer.start()
+	
+	if Globals.hunger <= 0:
 		Globals.health -= 1
 		oxygenTimer.start()
 
